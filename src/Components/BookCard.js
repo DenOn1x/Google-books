@@ -1,16 +1,13 @@
 import React from 'react';
 
-const BookCard = (props) => {
+const BookCard = ({book}) => {
     return (
         <div>
-            <img
-                src={props.image}
-                alt=""
-            />
+            { book.volumeInfo.imageLinks && <img src={book.volumeInfo.imageLinks.thumbnail} alt="" /> }
             <div>
-                <h2>{props.title}</h2>
-                <h3>{props.author}</h3>
-                <p>{props.publishedData}</p>
+                <h2>{book.volumeInfo.title}</h2>
+                <h3>{book.volumeInfo.authors}</h3>
+                <p>{book.volumeInfo.publishedDate}</p>
             </div>
 
         </div>

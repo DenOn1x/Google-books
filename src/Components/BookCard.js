@@ -1,15 +1,20 @@
 import React from 'react';
 
 const BookCard = ({book}) => {
+    const openCard = (e) => {
+        window.open(e.volumeInfo.infoLink, '_blank');
+    }
     return (
-        <div>
-            { book.volumeInfo.imageLinks && <img src={book.volumeInfo.imageLinks.thumbnail} alt="" /> }
-            <div>
-                <h2>{book.volumeInfo.title}</h2>
-                <h3>{book.volumeInfo.authors}</h3>
-                <p>{book.volumeInfo.publishedDate}</p>
-            </div>
-
+        <div className="book-card" onClick={() => openCard(book)}>
+            {book.volumeInfo.imageLinks &&
+                <img className="book-image" src={book.volumeInfo.imageLinks.thumbnail} alt="Picture didn't load"/>}
+                <p className="book-category">{(book.volumeInfo?.categories || 'Not category')}</p>
+                <p className="book-title">{book.volumeInfo.title}</p>
+                <p className="book-author"><b>Author:</b> {book.volumeInfo.authors}</p>
+                <p className="book-date-published">
+                    <b>Published Date:</b> {book.volumeInfo.publishedDate === '0000' ? 'Not available' :
+                    book.volumeInfo.publishedDate.substring(0, 4)}
+                </p>
         </div>
     );
 };

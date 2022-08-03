@@ -14,11 +14,10 @@ const Books = (props) => {
     const [categories, setCategories] = useState('');
     const maxResult = 30;
 
-
     const searchBooks = async (e) => {
         e.preventDefault();
-        const res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchPattern}&startIndex=${startIndex}&maxResults=${maxResult}`)
-        const resCount = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchPattern}`)
+        const res = await axios.get(`${process.env.REACT_APP_API_KEY}q=${searchPattern}&startIndex=${startIndex}&maxResults=${maxResult}`)
+        const resCount = await axios.get(`${process.env.REACT_APP_API_KEY}q=${searchPattern}`)
         const category = document.getElementById('category_select').value;
         const countOfBookElement = document.getElementsByClassName('count_of_book__result')
         let resultBook = getBooksByCategory(res, category)
@@ -45,12 +44,9 @@ const Books = (props) => {
 
     const handleSearch = (e) => {
         setSearchPattern(e.target.value)
-        // console.log(e.target.value)
     }
     const handleSort = (e) => {
         setSort(e.target.value)
-        // console.log(e.target.value)
-
     }
 
     const handleCategories = (e) => {
@@ -79,7 +75,6 @@ const Books = (props) => {
             return parseInt(a.volumeInfo.publishedDate.substring(0, 4)) - parseInt(b.volumeInfo.publishedDate.substring(0, 4))
         }
     })
-
 
     return (
             <div>

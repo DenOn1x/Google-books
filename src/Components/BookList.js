@@ -5,14 +5,14 @@ const BookList = ({books}) => {
     return (
         <div className="book-container">
             {
-                books.map((book, i)=>{
+                books.map((book, i) => {
                     return <BookCard
                         key={i}
                         book={book}
                     />
                 })
             }
-            
+
         </div>
     );
 };

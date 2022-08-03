@@ -1,6 +1,9 @@
 import React from 'react';
+import dataSort from './Data/DataSort'
+import dataCategories from './Data/DataCategories'
 
 const SearchArea = (props) => {
+
     return (
 
         <div className="search-area">
@@ -12,20 +15,21 @@ const SearchArea = (props) => {
                     action="#"
                     onSubmit={props.searchBooks}
                 >
-                        <input id="input-demo"
-                               onChange={props.handleSearch}
-                               type="text"
-                               className="header__input"
-                               placeholder="Enter text to search"
-                        />
+                    <input id="input-demo"
+                           onChange={props.handleSearch}
+                           type="text"
+                           className="header__input"
+                           placeholder="Enter text to search"
+                    />
                     <div className="header__select-block">
                         <label className="sort">
                             Sorting by
-                        </label> <select className="mySelect" defaultValue="Sort" onChange={props.handleSort}>
-                        {/*<option disabled value="Sort">Sort</option>*/}
-                        <option value="Newest">Newest</option>
-                        <option value="Oldest">Oldest</option>
-                    </select>
+                        </label>
+                        <select className="mySelect" defaultValue="Sort" onChange={props.handleSort}>
+                            {dataSort.map(
+                                (d) =>
+                                    (<option key={d.id} value={d.value}>{d.value}</option>))}
+                        </select>
 
                         <label className="category">
                             Categories
@@ -33,12 +37,13 @@ const SearchArea = (props) => {
                         <select
                             id="category_select" className="mySelect" defaultValue="all"
                             onChange={props.handleCategories}>
-                            <option value="all">all</option>
-                            <option value="biography">biography</option>
-                            <option value="computers">computers</option>
-                            <option value="history">history</option>
-                            <option value="medical">medical</option>
-                            <option value="poetry">poetry</option>
+                            {
+                                dataCategories.map(
+                                    (e)=>(
+                                        <option key={e.id} value={e.value}>{e.value}</option>
+                                    )
+                                )
+                            }
                         </select>
                     </div>
                     <button className="btn" type="submit">Refresh categories</button>
